@@ -24,6 +24,10 @@
     "@ngxs/store": "^3.6.2",
     "angular-in-memory-web-api": "^0.9.0",
     "rxjs": "~6.5.4",
+    "stylelint": "^13.2.0",
+    "stylelint-config-sass-guidelines": "^7.0.0",
+    "stylelint-order": "^4.0.0",
+    "stylelint-scss": "^3.14.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
