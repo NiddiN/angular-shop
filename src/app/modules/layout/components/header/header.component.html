@@ -1,9 +1,21 @@
 <mat-toolbar color="primary" class="header">
-  <div class="header__navigation">
+  <div>
     <a><button mat-button [routerLink]="['/']">Главная</button></a>
     <a><button mat-button [routerLink]="['/basket']">Корзина</button></a>
   </div>
-  <div class="header_info">
-    info
+  <div class="basket-info">
+    <mat-icon class="basket-info__icon">shopping_cart</mat-icon>
+    <div class="basket-info__titles">
+      <div>В корзине</div>
+      <div>На сумму</div>
+    </div>
+    <div class="basket-info__values">
+      <div>
+        {{ amount$ | async }}
+      </div>
+      <div>
+        {{ fullPrice$ | async }}
+      </div>
+    </div>
   </div>
 </mat-toolbar>

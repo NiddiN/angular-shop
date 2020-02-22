@@ -9,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { InMemoryDataService } from './core/services';
 
 import { AppComponent } from './pages';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,10 +18,10 @@ import { AppComponent } from './pages';
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
+    SharedModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false })
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

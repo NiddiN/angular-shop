@@ -3,7 +3,7 @@
   <div>{{ phone.name }}</div>
   <div>{{ phone.price }} ₽</div>
   <div class="item-card__actions">
-    <button mat-raised-button color="primary">
+    <button mat-raised-button color="primary" (click)="onBasketClick()">
       <mat-icon>shopping_cart</mat-icon>
       В корзину
     </button>

@@ -1,0 +1,16 @@
+<div class="add-dialog">
+  <h2 class="add-dialog__title">Добавить в корзину</h2>
+  <img [src]="phone.image" class="add-dialog__image" />
+  <div class="add-dialog__info">
+    <div>{{ phone.name }}</div>
+    <mat-form-field>
+      <mat-label>Количество</mat-label>
+      <input matInput name="amount" type="number" [(ngModel)]="amount" min="1" />
+    </mat-form-field>
+    <div>Сумма: {{ phone.price * amount }}</div>
+  </div>
+  <button mat-raised-button color="primary" class="add-dialog__button" (click)="onAddClick()">
+    <mat-icon>shopping_cart</mat-icon>
+    Добавить
+  </button>
+</div>

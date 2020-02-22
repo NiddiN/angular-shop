@@ -1,4 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Select } from '@ngxs/store';
+import { BasketState } from 'src/app/core/basket/basket.state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -7,5 +10,9 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-  constructor() {}
+  @Select(BasketState.fullPrice)
+  public fullPrice$: Observable<number>;
+
+  @Select(BasketState.amount)
+  public amount$: Observable<number>;
 }

@@ -2,3 +2,21 @@
   display: flex;
   justify-content: space-between;
 }
+
+.basket-info {
+  align-items: center;
+  display: flex;
+  font-size: 14px;
+  line-height: 25px;
+
+  &__titles {
+    margin-right: 10px;
+  }
+
+  &__icon {
+    font-size: 40px;
+    height: 40px !important;
+    margin-right: 5px;
+    width: 40px !important;
+  }
+}
