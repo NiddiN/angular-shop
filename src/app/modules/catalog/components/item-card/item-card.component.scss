@@ -1,0 +1,13 @@
+.item-card {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 25px;
+  text-align: center;
+  width: 200px;
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+}

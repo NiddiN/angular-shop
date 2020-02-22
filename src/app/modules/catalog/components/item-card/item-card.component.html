@@ -1,0 +1,14 @@
+<mat-card class="item-card" *ngIf="phone">
+  <img [src]="phone.image" />
+  <div>{{ phone.name }}</div>
+  <div>{{ phone.price }} ₽</div>
+  <div class="item-card__actions">
+    <button mat-raised-button color="primary">
+      <mat-icon>shopping_cart</mat-icon>
+      В корзину
+    </button>
+    <button mat-icon-button color="primary">
+      <mat-icon>favorite_border</mat-icon>
+    </button>
+  </div>
+</mat-card>

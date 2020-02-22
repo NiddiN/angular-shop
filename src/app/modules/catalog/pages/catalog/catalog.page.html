@@ -1,0 +1,5 @@
+<div class="catalog">
+  <div class="catalog__item" *ngFor="let phone of phones$ | async">
+    <app-item-card [phone]="phone"></app-item-card>
+  </div>
+</div>

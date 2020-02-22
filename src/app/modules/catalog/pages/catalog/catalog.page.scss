@@ -1,0 +1,8 @@
+.catalog {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__item {
+    margin: 20px;
+  }
+}
