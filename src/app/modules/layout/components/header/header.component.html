@@ -14,7 +14,7 @@
         {{ amount$ | async }}
       </div>
       <div>
-        {{ fullPrice$ | async }}
+        {{ fullPrice$ | async | currency: 'RUB':'symbol-narrow' }}
       </div>
     </div>
   </div>

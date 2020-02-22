@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { tap, catchError } from 'rxjs/operators';
 
 import { State, NgxsOnInit, Selector, Action, StateContext } from '@ngxs/store';
 import { BasketStateModel } from './basket.model';
-import { LoadBasket, AddToBasket, OperationSuccess, OperationFailed } from './basket.actions';
+import { LoadBasket, AddToBasket, OperationSuccess, OperationFailed, RemoveFromBasket } from './basket.actions';
 
 import { BasketService } from '../services';
+import { IBasketItem } from 'src/lib/interfaces';
 
 @Injectable()
 @State<BasketStateModel>({
@@ -20,7 +21,11 @@ import { BasketService } from '../services';
   }
 })
 export class BasketState implements NgxsOnInit {
-  constructor(private basketService: BasketService, private snackBar: MatSnackBar) {}
+  constructor(private basketService: BasketService, private snackBar: MatSnackBar, private ngZone: NgZone) {}
+
+  /*
+    Selectors
+  */
 
   @Selector()
   public static basket({ basket }: BasketStateModel) {
@@ -37,20 +42,28 @@ export class BasketState implements NgxsOnInit {
     return amount;
   }
 
+  /*
+    Hooks
+  */
+
   public ngxsOnInit(ctx: StateContext<BasketStateModel>) {
     ctx.dispatch(new LoadBasket());
   }
+
+  /*
+    Actions
+  */
 
   @Action(LoadBasket)
   public loadBasket(ctx: StateContext<BasketStateModel>) {
     return this.basketService.getBasket().pipe(
       tap(basket => {
         if (basket) {
-          const priceList = basket.map(item => item.phone.price * item.amount);
-          const amountList = basket.map(item => item.amount);
-          const fullPrice = priceList.length ? priceList.reduce((acc, val) => acc + val) : 0;
-          const amount = amountList.length ? amountList.reduce((acc, val) => acc + val) : 0;
-          ctx.patchState({ basket, fullPrice, amount });
+          ctx.patchState({
+            basket,
+            fullPrice: this.calcPrice(basket),
+            amount: this.calcAmount(basket)
+          });
         }
       })
     );
@@ -65,8 +78,8 @@ export class BasketState implements NgxsOnInit {
         const basket = [...state.basket, basketItem];
         const newBasketItem = {
           basket,
-          fullPrice: basket.map(item => item.phone.price * item.amount).reduce((acc, val) => acc + val),
-          amount: basket.map(item => item.amount).reduce((acc, val) => acc + val)
+          fullPrice: this.calcPrice(basket),
+          amount: this.calcAmount(basket)
         };
         ctx.patchState(newBasketItem);
         ctx.dispatch(new OperationSuccess('Товар добавлен в корзину'));
@@ -75,15 +88,48 @@ export class BasketState implements NgxsOnInit {
     );
   }
 
+  @Action(RemoveFromBasket)
+  public removeFromBasket(ctx: StateContext<BasketStateModel>, { id }: RemoveFromBasket) {
+    const state = ctx.getState();
+    return this.basketService.removeFromBasket(id).pipe(
+      tap(() => {
+        const basket = state.basket.filter(item => item.id !== id);
+        ctx.patchState({
+          basket,
+          fullPrice: this.calcPrice(basket),
+          amount: this.calcAmount(basket)
+        });
+        ctx.dispatch(new OperationSuccess('Товар удален из корзины'));
+      }),
+      catchError(() => ctx.dispatch(new OperationFailed('Упс, что-то пошло не так :(')))
+    );
+  }
+
+  /*
+    Notice actions
+  */
+
   @Action(OperationSuccess)
   public operationSuccess(ctx: StateContext<BasketStateModel>, { message }: OperationSuccess) {
-    this.snackBar.open(message, '');
+    this.ngZone.run(() => this.snackBar.open(message));
     return ctx.patchState({ loading: false });
   }
 
   @Action(OperationFailed)
   public operationFailed(ctx: StateContext<BasketStateModel>, { message }: OperationFailed) {
-    this.snackBar.open(message, '', { panelClass: 'error-snackbar' });
+    this.ngZone.run(() => this.snackBar.open(message, '', { panelClass: 'error-snackbar' }));
     return ctx.patchState({ loading: false });
+  }
+
+  /*
+    Methods
+  */
+
+  private calcPrice(basket: IBasketItem[]): number {
+    return basket.length ? basket.map(item => item.phone.price * item.amount).reduce((acc, val) => acc + val) : 0;
+  }
+
+  private calcAmount(basket: IBasketItem[]): number {
+    return basket.length ? basket.map(item => item.amount).reduce((acc, val) => acc + val) : 0;
   }
 }

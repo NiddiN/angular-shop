@@ -5,9 +5,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
 const MODULES = [
   FormsModule,
@@ -16,9 +17,10 @@ const MODULES = [
   MatButtonModule,
   MatCardModule,
   MatIconModule,
-  MatSnackBarModule,
   MatDialogModule,
-  MatInputModule
+  MatInputModule,
+  MatTableModule,
+  MatSnackBarModule
 ];
 
 @NgModule({
@@ -28,10 +30,10 @@ const MODULES = [
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
       useValue: {
-        duration: 2000,
         verticalPosition: 'bottom',
         horizontalPosition: 'center',
-        panelClass: 'white-snackbar'
+        panelClass: 'white-snackbar',
+        duration: 2000
       }
     }
   ]

@@ -1,0 +1,15 @@
+.items-list {
+  &__image {
+    height: 40px;
+  }
+
+  &__cell {
+    &_small {
+      max-width: 65px;
+    }
+
+    &_medium {
+      max-width: 120px;
+    }
+  }
+}

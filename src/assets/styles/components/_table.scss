@@ -1,0 +1,12 @@
+.mat-table {
+  width: 600px;
+}
+
+.mat-header-cell,
+.mat-cell {
+  box-sizing: border-box;
+
+  &:not(:first-of-type) {
+    padding-left: 15px;
+  }
+}

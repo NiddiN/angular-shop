@@ -1,7 +1,7 @@
 <mat-card class="item-card" *ngIf="phone">
   <img [src]="phone.image" />
   <div>{{ phone.name }}</div>
-  <div>{{ phone.price }} ₽</div>
+  <div>{{ phone.price | currency: 'RUB':'symbol-narrow' }}</div>
   <div class="item-card__actions">
     <button mat-raised-button color="primary" (click)="onBasketClick()">
       <mat-icon>shopping_cart</mat-icon>

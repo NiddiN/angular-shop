@@ -1,0 +1,40 @@
+<mat-table [dataSource]="itemsList" class="mat-elevation-z8 items-list">
+  <ng-container matColumnDef="image">
+    <mat-header-cell *matHeaderCellDef class="items-list__cell_small"></mat-header-cell>
+    <mat-cell *matCellDef="let element" class="items-list__cell_small">
+      <img class="items-list__image" [src]="element.phone.image" />
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Наименование</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.phone.name }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <mat-header-cell *matHeaderCellDef class="items-list__cell_medium">Стоимость, р</mat-header-cell>
+    <mat-cell *matCellDef="let element" class="items-list__cell_medium">{{ element.phone.price }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="amount">
+    <mat-header-cell *matHeaderCellDef class="items-list__cell_medium">Количество, шт</mat-header-cell>
+    <mat-cell *matCellDef="let element" class="items-list__cell_medium">{{ element.amount }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="toWantList">
+    <mat-header-cell *matHeaderCellDef class="items-list__cell_small"></mat-header-cell>
+    <mat-cell *matCellDef="let element" class="items-list__cell_small">
+      <button mat-icon-button color="primary"><mat-icon>favorite_border</mat-icon></button>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="remove">
+    <mat-header-cell *matHeaderCellDef class="items-list__cell_small"></mat-header-cell>
+    <mat-cell *matCellDef="let element" class="items-list__cell_small">
+      <button mat-icon-button color="warn" (click)="onRemoveClick(element.id)"><mat-icon>delete</mat-icon></button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
