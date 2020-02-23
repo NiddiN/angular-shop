@@ -8,7 +8,13 @@ import { Phones } from 'src/lib/mocks';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const phones: IPhone[] = Phones;
-    const basket: IBasketItem[] = [];
+    const basket: IBasketItem[] = [
+      {
+        id: 1,
+        amount: 2,
+        phone: Phones[0]
+      }
+    ];
 
     return { phones, basket };
   }

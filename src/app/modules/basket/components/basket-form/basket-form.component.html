@@ -1,0 +1,33 @@
+<form [formGroup]="form" class="basket-form mat-elevation-z8">
+  <h2 class="basket-form__title">Данные для оформления заказа</h2>
+  <div class="basket-form__block">
+    <mat-form-field class="basket-form__input">
+      <mat-label>ФИО</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+    <mat-form-field class="basket-form__input">
+      <mat-label>Телефон</mat-label>
+      <input matInput formControlName="phone" [textMask]="{ mask: phoneMask }" />
+    </mat-form-field>
+  </div>
+
+  <div class="basket-form__block">
+    <mat-form-field class="basket-form__input">
+      <mat-label>E-Mail</mat-label>
+      <input matInput formControlName="email" [textMask]="{ mask: emailMask }" />
+    </mat-form-field>
+    <mat-form-field class="basket-form__input">
+      <mat-label>Адрес доставки</mat-label>
+      <input matInput formControlName="address" />
+    </mat-form-field>
+  </div>
+
+  <mat-form-field class="basket-form__input">
+    <mat-label>Комментарий</mat-label>
+    <textarea matInput formControlName="comment"></textarea>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" class="basket-form__button" [disabled]="form.invalid" (click)="onSubmit()">
+    Оформить заказ
+  </button>
+</form>

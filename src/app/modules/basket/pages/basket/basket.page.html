@@ -1,9 +1,11 @@
 <div class="basket">
   <ng-container *ngIf="amount$ | async; else empty">
-    <app-basket-list [itemsList]="basket$ | async"></app-basket-list>
+    <app-basket-list class="basket__list mrt-15" [itemsList]="basket$ | async"></app-basket-list>
+    <app-basket-form class="mrt-15" (formSubmited)="onFormSubmit($event)"></app-basket-form>
+    <app-order-info class="mrt-15" *ngIf="orderInfo$ | async as info" [orderInfo]="info"></app-order-info>
   </ng-container>
 
   <ng-template #empty>
-    <h2>Корзина пуста</h2>
+    <h2 class="basket_empty-title">Корзина пуста</h2>
   </ng-template>
 </div>

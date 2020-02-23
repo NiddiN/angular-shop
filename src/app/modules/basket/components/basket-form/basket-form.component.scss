@@ -1,0 +1,24 @@
+.basket-form {
+  box-sizing: border-box;
+  padding: 17px;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__block {
+    display: flex;
+  }
+
+  &__input {
+    width: 100%;
+
+    &:not(:last-of-type) {
+      margin-right: 10px;
+    }
+  }
+
+  &__button {
+    margin-right: auto;
+  }
+}

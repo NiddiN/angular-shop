@@ -1,4 +1,4 @@
-<mat-table [dataSource]="itemsList" class="mat-elevation-z8 items-list">
+<mat-table [dataSource]="itemsList" class="items-list mat-elevation-z8">
   <ng-container matColumnDef="image">
     <mat-header-cell *matHeaderCellDef class="items-list__cell_small"></mat-header-cell>
     <mat-cell *matCellDef="let element" class="items-list__cell_small">
@@ -18,7 +18,9 @@
 
   <ng-container matColumnDef="amount">
     <mat-header-cell *matHeaderCellDef class="items-list__cell_medium">Количество, шт</mat-header-cell>
-    <mat-cell *matCellDef="let element" class="items-list__cell_medium">{{ element.amount }}</mat-cell>
+    <mat-cell *matCellDef="let element" class="items-list__cell_medium">
+      {{ element.amount }}
+    </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="toWantList">

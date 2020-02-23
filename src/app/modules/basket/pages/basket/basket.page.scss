@@ -1,5 +1,12 @@
 .basket {
-  align-items: center;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+
+  &__empty-title {
+    text-align: center;
+  }
+
+  &__list {
+    margin-right: 40px;
+  }
 }

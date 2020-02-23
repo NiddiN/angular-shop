@@ -5,10 +5,10 @@ import { BasketRoutingModule } from './basket-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { BasketPage } from './pages';
-import { BasketListComponent } from './components';
+import { BasketListComponent, BasketFormComponent, OrderInfoComponent } from './components';
 
 @NgModule({
-  declarations: [BasketPage, BasketListComponent],
+  declarations: [BasketPage, BasketListComponent, BasketFormComponent, OrderInfoComponent],
   imports: [CommonModule, BasketRoutingModule, SharedModule]
 })
 export class BasketModule {}

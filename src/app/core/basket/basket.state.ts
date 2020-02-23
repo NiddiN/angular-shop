@@ -5,7 +5,14 @@ import { tap, catchError } from 'rxjs/operators';
 
 import { State, NgxsOnInit, Selector, Action, StateContext } from '@ngxs/store';
 import { BasketStateModel } from './basket.model';
-import { LoadBasket, AddToBasket, OperationSuccess, OperationFailed, RemoveFromBasket } from './basket.actions';
+import {
+  LoadBasket,
+  AddToBasket,
+  OperationSuccess,
+  OperationFailed,
+  RemoveFromBasket,
+  UpdateBasketItem
+} from './basket.actions';
 
 import { BasketService } from '../services';
 import { IBasketItem } from 'src/lib/interfaces';
@@ -94,6 +101,28 @@ export class BasketState implements NgxsOnInit {
     return this.basketService.removeFromBasket(id).pipe(
       tap(() => {
         const basket = state.basket.filter(item => item.id !== id);
+        ctx.patchState({
+          basket,
+          fullPrice: this.calcPrice(basket),
+          amount: this.calcAmount(basket)
+        });
+        ctx.dispatch(new OperationSuccess('Товар удален из корзины'));
+      }),
+      catchError(() => ctx.dispatch(new OperationFailed('Упс, что-то пошло не так :(')))
+    );
+  }
+
+  @Action(UpdateBasketItem)
+  public updateBasketItem(ctx: StateContext<BasketStateModel>, { item }: UpdateBasketItem) {
+    ctx.patchState({ loading: true });
+    const state = ctx.getState();
+    return this.basketService.upateBasketItem(item).pipe(
+      tap(updatedItem => {
+        const basket = state.basket;
+        const itemIndex = basket.findIndex(element => element.id !== item.id);
+        if (itemIndex !== -1) {
+          basket[itemIndex] = updatedItem;
+        }
         ctx.patchState({
           basket,
           fullPrice: this.calcPrice(basket),

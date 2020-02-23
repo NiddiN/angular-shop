@@ -1,4 +1,4 @@
-import { IPhone } from 'src/lib/interfaces';
+import { IPhone, IBasketItem } from 'src/lib/interfaces';
 
 export class LoadBasket {
   public static readonly type = '[Basket] Load basket';
@@ -12,6 +12,11 @@ export class AddToBasket {
 export class RemoveFromBasket {
   public static readonly type = '[Basket] Remove from basket';
   constructor(public readonly id: number) {}
+}
+
+export class UpdateBasketItem {
+  public static readonly type = '[Basket] Update basket item';
+  constructor(public readonly item: IBasketItem) {}
 }
 
 export class OperationSuccess {

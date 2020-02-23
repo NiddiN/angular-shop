@@ -20,4 +20,8 @@ export class BasketService {
   public removeFromBasket(id: number): Observable<IBasketItem> {
     return this.httpClient.delete<IBasketItem>(`${API_URL}/${id}`);
   }
+
+  public upateBasketItem(item: IBasketItem): Observable<IBasketItem> {
+    return this.httpClient.put<IBasketItem>(`${API_URL}/${item.id}`, item);
+  }
 }
