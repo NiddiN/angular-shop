@@ -9,8 +9,7 @@ import { AddToBasket } from 'src/app/core/basket/basket.actions';
 import { AddToWishList, RemoveFromWishList } from 'src/app/core/wish-list/wish-list.actions';
 
 import { IPhone, ICatalogItem } from 'src/lib/interfaces';
-
-import { AddToBasketDialogComponent } from '../add-to-basket-dialog/add-to-basket-dialog.component';
+import { AddToBasketDialogComponent } from 'src/app/shared/add-to-basket-dialog';
 
 @Component({
   selector: 'app-item-card',
