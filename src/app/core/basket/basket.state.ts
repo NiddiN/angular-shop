@@ -117,18 +117,20 @@ export class BasketState implements NgxsOnInit {
     ctx.patchState({ loading: true });
     const state = ctx.getState();
     return this.basketService.upateBasketItem(item).pipe(
-      tap(updatedItem => {
-        const basket = state.basket;
-        const itemIndex = basket.findIndex(element => element.id !== item.id);
+      tap(() => {
+        const basket = state.basket.slice();
+        const itemIndex = basket.findIndex(element => element.id === item.id);
+
         if (itemIndex !== -1) {
-          basket[itemIndex] = updatedItem;
+          basket[itemIndex] = item;
         }
+
         ctx.patchState({
           basket,
           fullPrice: this.calcPrice(basket),
           amount: this.calcAmount(basket)
         });
-        ctx.dispatch(new OperationSuccess('Товар удален из корзины'));
+        ctx.dispatch(new OperationSuccess('Количество товара изменено'));
       }),
       catchError(() => ctx.dispatch(new OperationFailed('Упс, что-то пошло не так :(')))
     );

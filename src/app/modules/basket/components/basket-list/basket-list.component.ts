@@ -1,7 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { IBasketItem } from 'src/lib/interfaces';
 import { Store } from '@ngxs/store';
-import { RemoveFromBasket } from 'src/app/core/basket/basket.actions';
+import { RemoveFromBasket, UpdateBasketItem } from 'src/app/core/basket/basket.actions';
 
 @Component({
   selector: 'app-basket-list',
@@ -19,5 +19,12 @@ export class BasketListComponent {
 
   public onRemoveClick(id: number) {
     this.store.dispatch(new RemoveFromBasket(id));
+  }
+
+  public onValueChange(amount: number, id: number) {
+    const item = this.itemsList.find(element => element.id === id);
+    if (item) {
+      this.store.dispatch(new UpdateBasketItem({ ...item, amount }));
+    }
   }
 }

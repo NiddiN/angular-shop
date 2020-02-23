@@ -1,0 +1,35 @@
+:host {
+  width: 100%;
+}
+
+.inline-form-field {
+  width: 100%;
+
+  &__view-block {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__field-block {
+    align-items: center;
+    display: flex;
+    width: 100%;
+  }
+
+  &__icon {
+    cursor: pointer;
+    font-size: 16px;
+    height: 18px !important;
+    width: 18px !important;
+
+    &_check {
+      color: #04ac04;
+    }
+  }
+
+  &__input {
+    border-bottom: 1px solid currentColor;
+  }
+}
