@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
-import { IPhone, IBasketItem } from 'src/lib/interfaces';
+import { IPhone, IBasketItem, IWishListItem } from 'src/lib/interfaces';
 import { Phones } from 'src/lib/mocks';
 
 @Injectable()
@@ -15,11 +15,18 @@ export class InMemoryDataService implements InMemoryDbService {
         phone: Phones[0]
       }
     ];
+    const wishList: IWishListItem[] = [
+      {
+        id: 1,
+        phone: Phones[3],
+        time: new Date()
+      }
+    ];
 
-    return { phones, basket };
+    return { phones, basket, wishList };
   }
 
-  genId(list: IBasketItem[]): number {
+  genId(list: any[]): number {
     return list.length > 0 ? Math.max(...list.map(item => item.id)) + 1 : 1;
   }
 }

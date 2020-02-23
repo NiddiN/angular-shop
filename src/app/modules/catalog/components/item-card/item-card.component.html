@@ -1,14 +1,24 @@
-<mat-card class="item-card" *ngIf="phone">
-  <img [src]="phone.image" />
-  <div>{{ phone.name }}</div>
-  <div>{{ phone.price | currency: 'RUB':'symbol-narrow' }}</div>
+<mat-card class="item-card" *ngIf="catalogItem">
+  <img [src]="catalogItem.phone.image" />
+  <div>{{ catalogItem.phone.name }}</div>
+  <div>{{ catalogItem.phone.price | currency: 'RUB':'symbol-narrow' }}</div>
   <div class="item-card__actions">
     <button mat-raised-button color="primary" (click)="onBasketClick()">
       <mat-icon>shopping_cart</mat-icon>
       В корзину
     </button>
-    <button mat-icon-button color="primary">
+    <button
+      mat-icon-button
+      color="primary"
+      *ngIf="!catalogItem.isInWishList; else inWishList"
+      (click)="addToWishList(catalogItem.phone)"
+    >
       <mat-icon>favorite_border</mat-icon>
     </button>
+    <ng-template #inWishList>
+      <button mat-icon-button color="primary" (click)="removeFromWishList(catalogItem.wishId)">
+        <mat-icon>favorite</mat-icon>
+      </button>
+    </ng-template>
   </div>
 </mat-card>

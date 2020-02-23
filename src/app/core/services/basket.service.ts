@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IBasketItem, IPhone } from 'src/lib/interfaces';
+
 import { Observable } from 'rxjs';
+
+import { IBasketItem, IPhone } from 'src/lib/interfaces';
 
 const API_URL = 'api/basket';
 
@@ -17,11 +19,11 @@ export class BasketService {
     return this.httpClient.post<IBasketItem>(API_URL, { phone, amount });
   }
 
-  public removeFromBasket(id: number): Observable<IBasketItem> {
-    return this.httpClient.delete<IBasketItem>(`${API_URL}/${id}`);
+  public removeFromBasket(id: number): Observable<null> {
+    return this.httpClient.delete<null>(`${API_URL}/${id}`);
   }
 
-  public upateBasketItem(item: IBasketItem): Observable<IBasketItem> {
-    return this.httpClient.put<IBasketItem>(`${API_URL}/${item.id}`, item);
+  public upateBasketItem(item: IBasketItem): Observable<null> {
+    return this.httpClient.put<null>(`${API_URL}/${item.id}`, item);
   }
 }

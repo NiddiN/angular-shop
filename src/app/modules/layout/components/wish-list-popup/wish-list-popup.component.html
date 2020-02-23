@@ -1,0 +1,17 @@
+<div class="wish-list-info">
+  <button mat-icon-button (click)="isPopupShowed = !isPopupShowed">
+    <mat-icon [matBadge]="amount$ | async" matBadgePosition="after" matBadgeColor="accent">
+      favorite
+    </mat-icon>
+  </button>
+  <div class="wish-list-info__popup popup mat-elevation-z8" *ngIf="isPopupShowed && amount$ | async">
+    <div class="popup__item" *ngFor="let item of lastAdded$ | async">
+      <img class="popup__image" [src]="item.phone.image" alt="image" />
+      <span>{{ item.phone.name }}</span>
+      <span class="popup__time">{{ item.time | date: 'HH:mm:ss' }}</span>
+    </div>
+    <div class="popup__link">
+      <a [routerLink]="['/wishlist']">Перейти к списку желаний</a>
+    </div>
+  </div>
+</div>

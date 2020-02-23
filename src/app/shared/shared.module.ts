@@ -10,6 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { MatBadgeModule } from '@angular/material/badge';
 
 const MODULES = [
   FormsModule,
@@ -22,7 +23,8 @@ const MODULES = [
   MatDialogModule,
   MatInputModule,
   MatTableModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatBadgeModule
 ];
 
 @NgModule({

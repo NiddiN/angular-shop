@@ -1,7 +1,14 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Select } from '@ngxs/store';
+
 import { PhoneService } from 'src/app/core/services';
-import { IPhone } from 'src/lib/interfaces';
+
 import { Observable } from 'rxjs';
+import { combineLatest, map } from 'rxjs/operators';
+
+import { WishListState } from 'src/app/core/wish-list/wish-list.state';
+
+import { IWishListItem, ICatalogItem } from 'src/lib/interfaces';
 
 @Component({
   templateUrl: './catalog.page.html',
@@ -9,9 +16,20 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CatalogPage {
-  public phones$: Observable<IPhone[]>;
+  @Select(WishListState.wishList)
+  public wishList$: Observable<IWishListItem[]>;
+
+  public catalog$: Observable<ICatalogItem[]>;
 
   constructor(private phoneService: PhoneService) {
-    this.phones$ = this.phoneService.getPhones();
+    this.catalog$ = this.phoneService.getPhones().pipe(
+      combineLatest(this.wishList$),
+      map(([phones, wishList]) =>
+        phones.map(phone => {
+          const wishItem = wishList.find(item => item.phone.id === phone.id);
+          return { phone, isInWishList: !!wishItem, wishId: wishItem?.id };
+        })
+      )
+    );
   }
 }

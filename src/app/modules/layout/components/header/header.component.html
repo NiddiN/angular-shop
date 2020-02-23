@@ -4,6 +4,9 @@
     <a><button mat-button [routerLink]="['/basket']">Корзина</button></a>
   </div>
   <div class="basket-info">
+    <div class="basket-info__wish-list">
+      <app-wish-list-popup></app-wish-list-popup>
+    </div>
     <mat-icon class="basket-info__icon">shopping_cart</mat-icon>
     <div class="basket-info__titles">
       <div>В корзине</div>
