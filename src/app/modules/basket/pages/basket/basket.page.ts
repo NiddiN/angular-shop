@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { BasketState } from 'src/app/core/basket/basket.state';
-import { Observable, BehaviorSubject, forkJoin, of } from 'rxjs';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { IBasketItem, IOrderPersonalInfo, IOrderInfo } from 'src/lib/interfaces';
-import { map, switchMap, filter, tap, combineLatest } from 'rxjs/operators';
+import { map, filter, tap } from 'rxjs/operators';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 
 @Component({
@@ -23,10 +23,9 @@ export class BasketPage implements OnDestroy {
   public orderInfo$: Observable<IOrderInfo>;
 
   constructor() {
-    this.orderInfo$ = this.$updateOrder.asObservable().pipe(
+    this.orderInfo$ = combineLatest([this.$updateOrder.asObservable(), this.basket$]).pipe(
       untilDestroyed(this),
-      filter(personalInfo => !!personalInfo),
-      combineLatest(this.basket$),
+      filter(([info]) => !!info),
       map(([info, order]) => ({ personalInfo: info, order })),
       tap(r => console.log(r))
     );

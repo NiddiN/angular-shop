@@ -4,7 +4,7 @@
     <mat-icon class="inline-form-field__icon" color="primary" (click)="isEdit = !isEdit">edit</mat-icon>
   </div>
   <div *ngIf="isEdit" class="inline-form-field__field-block">
-    <input matInput class="inline-form-field__input" [(ngModel)]="changedValue" />
+    <input matInput class="inline-form-field__input" type="number" [(ngModel)]="changedValue" />
     <mat-icon class="inline-form-field__icon inline-form-field__icon_check" (click)="switchView(true)">check</mat-icon>
     <mat-icon class="inline-form-field__icon" color="warn" (click)="switchView()">close</mat-icon>
   </div>

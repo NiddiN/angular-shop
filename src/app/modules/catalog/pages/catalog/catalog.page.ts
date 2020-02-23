@@ -3,8 +3,8 @@ import { Select } from '@ngxs/store';
 
 import { PhoneService } from 'src/app/core/services';
 
-import { Observable } from 'rxjs';
-import { combineLatest, map } from 'rxjs/operators';
+import { Observable, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { WishListState } from 'src/app/core/wish-list/wish-list.state';
 
@@ -22,8 +22,7 @@ export class CatalogPage {
   public catalog$: Observable<ICatalogItem[]>;
 
   constructor(private phoneService: PhoneService) {
-    this.catalog$ = this.phoneService.getPhones().pipe(
-      combineLatest(this.wishList$),
+    this.catalog$ = combineLatest([this.phoneService.getPhones(), this.wishList$]).pipe(
       map(([phones, wishList]) =>
         phones.map(phone => {
           const wishItem = wishList.find(item => item.phone.id === phone.id);

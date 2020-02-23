@@ -48,6 +48,11 @@ export class WishListState implements NgxsOnInit {
     return wishList.slice(0, 5);
   }
 
+  @Selector()
+  public static loading({ loading }: WishListStateModel) {
+    return loading;
+  }
+
   /*
     Hooks
   */

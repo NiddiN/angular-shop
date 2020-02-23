@@ -49,6 +49,11 @@ export class BasketState implements NgxsOnInit {
     return amount;
   }
 
+  @Selector()
+  public static loading({ loading }: BasketStateModel) {
+    return loading;
+  }
+
   /*
     Hooks
   */

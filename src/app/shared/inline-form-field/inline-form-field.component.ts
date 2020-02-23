@@ -23,7 +23,7 @@ export class InlineFormFieldComponent implements OnInit {
 
   public switchView(save?: boolean) {
     if (save && this.value !== this.changedValue) {
-      this.valueChanged.emit(+this.changedValue);
+      this.valueChanged.emit(this.changedValue);
     } else {
       this.changedValue = this.value;
     }
