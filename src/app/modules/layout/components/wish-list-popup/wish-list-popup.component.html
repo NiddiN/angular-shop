@@ -11,7 +11,7 @@
       <span class="popup__time">{{ item.time | date: 'HH:mm:ss' }}</span>
     </div>
     <div class="popup__link">
-      <a [routerLink]="['/wishlist']">Перейти к списку желаний</a>
+      <a [routerLink]="['/wish-list']" (click)="isPopupShowed = !isPopupShowed">Перейти к списку желаний</a>
     </div>
   </div>
 </div>

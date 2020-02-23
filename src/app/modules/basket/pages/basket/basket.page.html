@@ -1,3 +1,5 @@
+<h1>Корзина</h1>
+
 <div class="basket">
   <ng-container *ngIf="amount$ | async; else empty">
     <app-basket-list class="basket__list mrt-15" [itemsList]="basket$ | async"></app-basket-list>
@@ -6,6 +8,6 @@
   </ng-container>
 
   <ng-template #empty>
-    <h2 class="basket__empty-title">Корзина пуста</h2>
+    <h2 class="basket__empty-title">Здесь пока нет ни одного товара</h2>
   </ng-template>
 </div>
