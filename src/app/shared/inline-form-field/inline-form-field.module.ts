@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared.module';
-import { InlineFormFieldComponent } from './inline-form-field.component';
 import { CommonModule } from '@angular/common';
+
+import { InlineFormFieldComponent } from './inline-form-field.component';
 
 @NgModule({
   declarations: [InlineFormFieldComponent],

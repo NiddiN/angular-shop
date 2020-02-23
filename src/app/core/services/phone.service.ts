@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { Observable } from 'rxjs';
+
 import { IPhone } from 'src/lib/interfaces';
 
 const API_URL = 'api/phones';
