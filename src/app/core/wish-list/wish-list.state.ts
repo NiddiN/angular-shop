@@ -67,12 +67,14 @@ export class WishListState implements NgxsOnInit {
 
   @Action(LoadWishList)
   public loadWishList(ctx: StateContext<WishListStateModel>) {
+    ctx.patchState({ loading: true });
     return this.wishListService.getWishList().pipe(
       tap(wishList => {
         if (wishList) {
           ctx.patchState({
             wishList: this.sortWishList(wishList),
-            amount: wishList.length
+            amount: wishList.length,
+            loading: false
           });
         }
       })

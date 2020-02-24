@@ -68,13 +68,15 @@ export class BasketState implements NgxsOnInit {
 
   @Action(LoadBasket)
   public loadBasket(ctx: StateContext<BasketStateModel>) {
+    ctx.patchState({ loading: true });
     return this.basketService.getBasket().pipe(
       tap(basket => {
         if (basket) {
           ctx.patchState({
             basket,
             fullPrice: this.calcPrice(basket),
-            amount: this.calcAmount(basket)
+            amount: this.calcAmount(basket),
+            loading: false
           });
         }
       })
